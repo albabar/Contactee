@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api, constraints: lambda { |req| req.format == :json } do
+    get :me, to: 'me#index'
+  end
+
   root 'home#index'
   get '*path' => 'home#index'
 end
