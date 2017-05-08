@@ -4,6 +4,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('Running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'factory_girl_rails'
+require 'simplecov'
+SimpleCov.start 'rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

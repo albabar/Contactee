@@ -19,3 +19,4 @@
 .byebug_history
 /public/packs
 config/database.yml
+coverage/

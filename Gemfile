@@ -9,11 +9,15 @@ gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
+  gem 'rubocop', require: false
+end
+
+group :test do
   gem 'rspec-rails', '~> 3.6', require: false
   gem 'factory_girl_rails', '~> 4.0', require: false
-  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers',
-                          branch: 'rails-5', require: false
-  gem 'rubocop', require: false
+  gem 'shoulda-matchers',
+      github: 'thoughtbot/shoulda-matchers', branch: 'rails-5', require: false
+  gem 'simplecov', require: false
 end
 
 group :development do
