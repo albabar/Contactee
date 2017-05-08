@@ -3,9 +3,15 @@
 // of the page.
 
 import ReactDOM from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const Hello = props => <div>Hello {props.name}!</div>;
+const Hello = props => (
+  <div>
+    <h1>Hello {props.name}!</h1>
+    Path: {window.location.pathname}
+  </div>
+);
 
 Hello.defaultProps = {
   name: 'David',
