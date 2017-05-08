@@ -9,6 +9,9 @@ gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.6', require: false
+  gem 'factory_girl_rails', '~> 4.0', require: false
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers', branch: 'rails-5', require: false
 end
 
 group :development do
