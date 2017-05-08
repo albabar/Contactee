@@ -27,5 +27,9 @@ module Contactee
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.to_prepare do
+      DeviseController.respond_to :json
+    end
   end
 end
