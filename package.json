@@ -18,7 +18,9 @@
     "file-loader": "^0.11.1",
     "glob": "^7.1.1",
     "js-yaml": "^3.8.3",
+    "material-ui": "^0.18.0",
     "node-sass": "^4.5.2",
+    "normalize.css": "^7.0.0",
     "path-complete-extname": "^0.1.0",
     "postcss-loader": "^2.0.1",
     "postcss-smart-import": "^0.6.13",
@@ -27,6 +29,7 @@
     "rails-erb-loader": "^5.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-tap-event-plugin": "^2.0.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
@@ -35,10 +38,10 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-plugin-react": "^7.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.0.0",
     "webpack-dev-server": "^2.4.5"
   }
 }

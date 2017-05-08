@@ -1,16 +1,27 @@
-// Run this example by adding <%= javascript_pack_tag 'hello_react' %> to the head of your layout file,
-// like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
-// of the page.
-
 import ReactDOM from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+injectTapEventPlugin();
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+import 'normalize.css/normalize.css'
 
 const Hello = props => (
-  <div>
-    <h1>Hello {props.name}!</h1>
-    Path: {window.location.pathname}
-  </div>
+  <MuiThemeProvider>
+    <div>
+      <AppBar
+        title="Title"
+        iconElementRight={<RaisedButton label="Login" />}
+      />
+      <div className="container">
+        <h1>Hello {props.name}!</h1>
+        Path: {window.location.pathname}
+        <RaisedButton label="Default" />
+      </div>
+    </div>
+  </MuiThemeProvider>
 );
 
 Hello.defaultProps = {
