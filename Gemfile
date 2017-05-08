@@ -7,6 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'devise', github: 'plataformatec/devise'
+gem 'friendly_id'
 
 group :development, :test do
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
