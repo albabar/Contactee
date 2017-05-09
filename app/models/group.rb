@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: %i(slugged scoped), scope: :user_id
 
   belongs_to :user
 

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170508174909) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug", "user_id"], name: "index_groups_on_slug_and_user_id", unique: true
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
@@ -36,4 +37,5 @@ ActiveRecord::Schema.define(version: 20170508174909) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "groups", "users"
 end
