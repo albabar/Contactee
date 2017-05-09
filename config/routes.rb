@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :api, constraints: ->(req) { req.format == :json } do
     get :me, to: 'me#index'
     resources :groups, param: :slug
+    resources :contacts, param: :slug
   end
 
   root 'home#index'
