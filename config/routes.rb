@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api, constraints: lambda { |req| req.format == :json } do
     get :me, to: 'me#index'
-    resources :groups
+    resources :groups, param: :slug
   end
 
   root 'home#index'

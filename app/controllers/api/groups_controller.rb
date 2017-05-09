@@ -5,18 +5,22 @@ class API::GroupsController < API::BaseController
     render json: current_user.groups
   end
 
-  def show; end
+  def show
+    render json: @group
+  end
 
   def create
-    current_user.groups.create! group_params
+    render json: current_user.groups.create!(group_params), status: :created
   end
 
   def update
     @group.update! name: params[:group][:name], slug: nil
+    render json: @group.reload
   end
 
   def destroy
     @group.destroy
+    head :no_content
   end
 
   private
@@ -27,5 +31,7 @@ class API::GroupsController < API::BaseController
 
   def find_group
     @group ||= current_user.groups.find_by!(slug: params[:slug])
+  rescue ActiveRecord::RecordNotFound => _e
+    render json: {error: 'Group not found!'}, status: :not_found
   end
 end
