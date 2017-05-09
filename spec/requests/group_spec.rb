@@ -1,5 +1,7 @@
-RSpec.describe 'Group Management', :type => :request do
-  let(:group_attributes) { {group: {name: 'Best Buds'}} }
+# frozen_string_literal: true
+
+RSpec.describe 'Group Management', type: :request do
+  let(:group_attributes) { { group: { name: 'Best Buds' } } }
   let(:parsed_response) { JSON.parse(response.body) }
   let(:group) { Group.create! group_attributes[:group].merge(user: user) }
 
@@ -69,7 +71,7 @@ RSpec.describe 'Group Management', :type => :request do
   end
 
   describe 'PATCH /api/groups/:slug' do
-    let(:new_params) { {group: {name: 'Childhood buds'}} }
+    let(:new_params) { { group: { name: 'Childhood buds' } } }
     let(:api_call) { patch "/api/groups/#{group.slug}.json", params: new_params }
 
     it 'returns updated group' do

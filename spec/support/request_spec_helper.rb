@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module RequestSpecHelper
   attr_reader :user
 
   def sign_in(user = nil, password = nil)
     @user = user.presence || create_user
-    login_attributes = {user: { email: @user.email, password: password || @password} }
-    post '/api/users/sign_in.json', params: login_attributes
+    post '/api/users/sign_in.json', params: login_attributes(password)
   end
 
   def sign_out
@@ -17,5 +18,9 @@ module RequestSpecHelper
     attributes = attributes_for(:user)
     @password = attributes[:password]
     User.create!(attributes)
+  end
+
+  def login_attributes(password = nil)
+    { user: { email: @user.email, password: password || @password } }
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class API::GroupsController < API::BaseController
   before_action :find_group, only: %i(show update destroy)
 
@@ -32,6 +34,6 @@ class API::GroupsController < API::BaseController
   def find_group
     @group ||= current_user.groups.find_by!(slug: params[:slug])
   rescue ActiveRecord::RecordNotFound => _e
-    render json: {error: 'Group not found!'}, status: :not_found
+    render json: { error: 'Group not found!' }, status: :not_found
   end
 end

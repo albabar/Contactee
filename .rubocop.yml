@@ -1,6 +1,8 @@
 AllCops:
+  TargetRubyVersion: 2.4
   Exclude:
     - db/schema.rb
+    - db/migrate/*
     - node_modules/**/*
     - bin/**/*
 
@@ -28,4 +30,14 @@ Style/PercentLiteralDelimiters:
     '%W': '{}'
 
 Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+
+Style/ClassAndModuleChildren:
   Enabled: false

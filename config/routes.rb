@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  scope :api, constraints: lambda { |req| req.format == :json } do
+  scope :api, constraints: ->(req) { req.format == :json } do
     devise_for :users, skip: %i(registrations sessions)
     as :user do
       post :users, to: 'devise/registrations#create'
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api, constraints: lambda { |req| req.format == :json } do
+  namespace :api, constraints: ->(req) { req.format == :json } do
     get :me, to: 'me#index'
     resources :groups, param: :slug
   end

@@ -1,5 +1,6 @@
-RSpec.describe 'User Authentication', :type => :request do
+# frozen_string_literal: true
 
+RSpec.describe 'User Authentication', type: :request do
   let(:parsed_response) { JSON.parse(response.body) }
 
   describe 'GET /api/me' do
