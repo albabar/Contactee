@@ -11,7 +11,7 @@ RSpec.describe 'Group Management', type: :request do
   end
 
   describe 'GET /api/groups' do
-    let(:api_call) { get '/api/groups.json' }
+    let(:api_call) { get '/api/groups' }
 
     it 'returns all groups' do
       api_call
@@ -24,7 +24,7 @@ RSpec.describe 'Group Management', type: :request do
   end
 
   describe 'GET /api/groups/:slug' do
-    let(:api_call) { get "/api/groups/#{group.slug}.json" }
+    let(:api_call) { get "/api/groups/#{group.slug}" }
 
     it 'returns the group' do
       api_call
@@ -34,7 +34,7 @@ RSpec.describe 'Group Management', type: :request do
     end
 
     it 'returns the group' do
-      get "/api/groups/#{group.id}.json"
+      get "/api/groups/#{group.id}"
       expect(parsed_response).to be_an(Hash)
       expect(parsed_response['error']).to eq('Group not found!')
       expect(response).to have_http_status(404)
@@ -44,7 +44,7 @@ RSpec.describe 'Group Management', type: :request do
   end
 
   describe 'POST /api/groups' do
-    let(:api_call) { post '/api/groups.json', params: group_attributes }
+    let(:api_call) { post '/api/groups', params: group_attributes }
 
     it 'creates a group' do
       expect { api_call }.to change(Group, :count).by(1)
@@ -72,7 +72,7 @@ RSpec.describe 'Group Management', type: :request do
 
   describe 'PATCH /api/groups/:slug' do
     let(:new_params) { { group: { name: 'Childhood buds' } } }
-    let(:api_call) { patch "/api/groups/#{group.slug}.json", params: new_params }
+    let(:api_call) { patch "/api/groups/#{group.slug}", params: new_params }
 
     it 'returns updated group' do
       api_call
@@ -93,7 +93,7 @@ RSpec.describe 'Group Management', type: :request do
   end
 
   describe 'DELETE /api/groups/:slug' do
-    let(:api_call) { delete "/api/groups/#{group.slug}.json" }
+    let(:api_call) { delete "/api/groups/#{group.slug}" }
 
     it 'deletes the group' do
       api_call

@@ -5,7 +5,7 @@ RSpec.describe 'User Authentication', type: :request do
 
   describe 'GET /api/me' do
     after { expect(response.content_type).to eq('application/json') }
-    let(:api_call) { get '/api/me.json' }
+    let(:api_call) { get '/api/me' }
 
     it 'returns logged in user' do
       sign_in
@@ -23,7 +23,7 @@ RSpec.describe 'User Authentication', type: :request do
     end
   end
 
-  describe 'DELETE /api/users/sign_in.json' do
+  describe 'DELETE /api/users/sign_in' do
     it 'logs out user' do
       sign_out
       expect(response).to have_http_status(204)

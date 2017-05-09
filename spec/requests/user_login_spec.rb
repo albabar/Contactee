@@ -7,26 +7,26 @@ RSpec.describe 'User Authentication', type: :request do
   let!(:user) { User.create!(user_attributes) }
   let(:parsed_response) { JSON.parse(response.body) }
 
-  describe 'POST /api/users/sign_in.json' do
+  describe 'POST /api/users/sign_in' do
     after { expect(response.content_type).to eq('application/json') }
 
     it 'logs in user with valid creds' do
-      post '/api/users/sign_in.json', params: login_attributes
+      post '/api/users/sign_in', params: login_attributes
       expect(parsed_response['id']).to eq(user.id)
       expect(response).to have_http_status(:created)
     end
 
     it 'shows error with invalid creds' do
-      post '/api/users/sign_in.json',
+      post '/api/users/sign_in',
            params: { user: { email: 'mula@khao.com' } }
       expect(parsed_response['error']).to eq('Invalid Email or password.')
       expect(response).to have_http_status(401)
     end
   end
 
-  describe 'DELETE /api/users/sign_in.json' do
+  describe 'DELETE /api/users/sign_in' do
     it 'logs out user' do
-      delete '/api/users/sign_in.json'
+      delete '/api/users/sign_in'
       expect(response).to have_http_status(204)
     end
   end

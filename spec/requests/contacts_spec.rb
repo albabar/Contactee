@@ -11,7 +11,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
   end
 
   describe 'GET /api/contacts' do
-    let(:api_call) { get '/api/contacts.json' }
+    let(:api_call) { get '/api/contacts' }
 
     it 'returns all contacts' do
       api_call
@@ -24,7 +24,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
   end
 
   describe 'GET /api/contacts/:slug' do
-    let(:api_call) { get "/api/contacts/#{contact.slug}.json" }
+    let(:api_call) { get "/api/contacts/#{contact.slug}" }
 
     it 'returns the contact' do
       api_call
@@ -34,7 +34,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
     end
 
     it 'returns the contact' do
-      get "/api/contacts/#{contact.id}.json"
+      get "/api/contacts/#{contact.id}"
       expect(parsed_response).to be_an(Hash)
       expect(parsed_response['error']).to eq('contact not found!')
       expect(response).to have_http_status(404)
@@ -44,7 +44,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
   end
 
   describe 'POST /api/contacts' do
-    let(:api_call) { post '/api/contacts.json', params: contact_attributes }
+    let(:api_call) { post '/api/contacts', params: contact_attributes }
 
     it 'creates a contact' do
       expect { api_call }.to change(Contact, :count).by(1)
@@ -72,7 +72,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
 
   describe 'PATCH /api/contacts/:slug' do
     let(:new_params) { { contact: { organization: 'SpaceX' } } }
-    let(:api_call) { patch "/api/contacts/#{contact.slug}.json", params: new_params }
+    let(:api_call) { patch "/api/contacts/#{contact.slug}", params: new_params }
 
     it 'returns updated contact' do
       api_call
@@ -87,7 +87,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
   end
 
   describe 'DELETE /api/contacts/:slug' do
-    let(:api_call) { delete "/api/contacts/#{contact.slug}.json" }
+    let(:api_call) { delete "/api/contacts/#{contact.slug}" }
 
     it 'deletes the contact' do
       api_call
