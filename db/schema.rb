@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508174909) do
+ActiveRecord::Schema.define(version: 20170509133525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "organization"
+    t.boolean "is_organization", default: false
+    t.string "cellular"
+    t.string "phone"
+    t.date "birthday"
+    t.string "address_line1"
+    t.string "address_line2"
+    t.string "homepage"
+    t.text "notes"
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email", "user_id"], name: "index_contacts_on_email_and_user_id", unique: true
+    t.index ["slug", "user_id"], name: "index_contacts_on_slug_and_user_id", unique: true
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
@@ -37,5 +59,6 @@ ActiveRecord::Schema.define(version: 20170508174909) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "contacts", "users"
   add_foreign_key "groups", "users"
 end
