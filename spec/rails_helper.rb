@@ -9,6 +9,9 @@ require 'shoulda/matchers'
 SimpleCov.start 'rails'
 ActiveRecord::Migration.maintain_test_schema!
 
+require 'support/authenticated_endpoints'
+require 'support/request_spec_helper'
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -18,6 +21,7 @@ end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include RequestSpecHelper, type: :request
 
   config.use_transactional_fixtures = true
 
