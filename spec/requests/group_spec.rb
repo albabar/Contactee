@@ -55,6 +55,16 @@ RSpec.describe 'Group Management', :type => :request do
       expect(response).to have_http_status(201)
     end
 
+    it 'only creates for current user' do
+      old_user = user
+      sign_out
+      sign_in
+      api_call
+      expect(parsed_response['user_id']).not_to eq(old_user.id)
+      expect(parsed_response['user_id']).to eq(user.id)
+      expect(response).to have_http_status(201)
+    end
+
     it_behaves_like 'authenticated_endpoint'
   end
 
