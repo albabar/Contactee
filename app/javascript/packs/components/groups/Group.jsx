@@ -3,19 +3,38 @@ import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 export class Group extends React.Component {
-  state = { name: this.props.name, editing: false };
+  state = { name: this.props.name, editing: false, destroy: false };
 
   static propTypes = {
     id: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     update: PropTypes.func.isRequired,
+    destroy: PropTypes.func.isRequired,
   };
+
+  destroyConfirmActions = () => [
+    <FlatButton
+      label="Cancel"
+      primary={true}
+      onTouchTap={this.stopDestroy}
+    />,
+    <FlatButton
+      label="Discard"
+      secondary={true}
+      onTouchTap={this.destroy}
+    />,
+  ];
 
   startEditing = () => this.setState({ editing: true });
   resetEditing = () => this.setState({ name: this.props.name, editing: false });
+  startDestroy = () => this.setState({ destroy: true });
+  stopDestroy = () => this.setState({ destroy: false });
   saveGroup = (e) => {
     switch(e.keyCode){
       case 13:
@@ -28,6 +47,11 @@ export class Group extends React.Component {
       default:
         break;
     }
+  };
+
+  destroy = () => {
+    this.props.destroy(this.props.id);
+    this.stopDestroy()
   };
 
   render() {
@@ -50,7 +74,16 @@ export class Group extends React.Component {
             type="submit"
             label=""
             icon={<DeleteForever />}
+            onClick={this.startDestroy}
           />
+          <Dialog
+            actions={this.destroyConfirmActions()}
+            modal={false}
+            open={this.state.destroy}
+            onRequestClose={this.stopDestroy}
+          >
+            {`Delete the group ${this.props.name}`}
+          </Dialog>
         </div>
       </div>
     )

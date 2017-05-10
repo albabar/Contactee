@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import post from 'utils/post';
 import get from 'utils/get';
 import patch from 'utils/patch';
+import deleTE from 'utils/deleTE';
 import verifyAuth from 'verifyAuth';
 import Form from './Form';
 import Group from './Group';
@@ -34,10 +35,17 @@ export class Index extends React.Component {
       })
   };
 
+  deleteGroup = (groupId) => {
+    deleTE(`/api/groups/${this.state.groups.find(g => g.id === groupId).slug}`)
+      .then(() => {
+        this.setState({groups: this.state.groups.filter(g => g.id !== groupId)})
+      })
+  };
+
   getAllGroups = () => get('/api/groups').then(groups => this.setState({groups}));
 
   prepareAllGroups = () => this.state.groups.map(
-    group => <Group {...group} update={this.updateGroup} key={group.id} />
+    group => <Group {...group} update={this.updateGroup} destroy={this.deleteGroup} key={group.id} />
   );
 
   render() {
