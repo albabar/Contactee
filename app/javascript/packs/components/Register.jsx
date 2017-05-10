@@ -14,7 +14,6 @@ export class Register extends React.Component {
   register = (e) => {
     e.preventDefault();
     post('/api/users', { user: this.state })
-      .then(res => res.ok === true && res.json())
       .then(json => this.setState({user: json}))
   };
 

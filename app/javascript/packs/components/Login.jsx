@@ -15,7 +15,6 @@ export class Login extends React.Component {
   authenticate = (e) => {
     e.preventDefault();
     post('/api/users/sign_in', { user: this.state })
-      .then(res => res.ok === true && res.json())
       .then(json => this.setState({user: json}))
   };
 

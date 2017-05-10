@@ -9,7 +9,7 @@ export function verifyGuest(Component) {
       this.getSession();
     }
 
-    getSession = () => get('/api/me').then(response => response.json()).then(json => this.setState(json));
+    getSession = () => get('/api/me').then(json => this.setState(json));
 
     render() {
       switch(this.state.signed_in) {

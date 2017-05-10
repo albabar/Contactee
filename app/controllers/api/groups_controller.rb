@@ -12,7 +12,14 @@ class API::GroupsController < API::BaseController
   end
 
   def create
-    render json: current_user.groups.create!(group_params), status: :created
+    group = current_user.groups.create(group_params)
+    body, status = if group.id
+                     [group, :created]
+                   else
+                     [{errors: group.errors}, :unprocessable_entity]
+                   end
+
+    render json: body, status: status
   end
 
   def update
