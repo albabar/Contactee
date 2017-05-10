@@ -9,7 +9,7 @@ import 'normalize.css/normalize.css'
 import Route from 'react-router-dom/Route'
 import Link from 'react-router-dom/Link'
 import BrowserRouter from 'react-router-dom/BrowserRouter'
-import Contacts from 'components/Contacts'
+import ContactIndex from 'components/contacts/Index'
 import Login from 'components/Login'
 import HomeIndex from 'components/Index'
 import Register from 'components/Register'
@@ -41,7 +41,7 @@ export default class extends React.Component {
               <Route exact path="/" component={HomeIndex}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
-              <Route path="/contacts" component={Contacts}/>
+              <Route path="/contacts" component={ContactIndex}/>
               <Route path="/groups" component={GroupIndex}/>
             </div>
           </div>

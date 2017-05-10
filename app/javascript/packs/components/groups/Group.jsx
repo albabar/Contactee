@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
 
 
 export class Group extends React.Component {
