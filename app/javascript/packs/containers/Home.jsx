@@ -9,6 +9,7 @@ import 'normalize.css/normalize.css'
 import Contacts from '../components/Contacts'
 import Login from '../components/Login'
 import Index from '../components/Index'
+import Register from '../components/Register'
 import {
   Route,
   Link,
@@ -39,6 +40,7 @@ export default class extends React.Component {
             <div className="row center-xs">
               <Route exact path="/" component={Index}/>
               <Route path="/login" component={Login}/>
+              <Route path="/register" component={Register}/>
               <Route path="/contacts" component={Contacts}/>
             </div>
           </div>
