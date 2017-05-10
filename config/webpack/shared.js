@@ -45,7 +45,11 @@ module.exports = {
     modules: [
       resolve(paths.source),
       resolve(paths.node_modules)
-    ]
+    ],
+    alias: {
+      utils: `${paths.entry}/utils`,
+      verifyAuth$: 'utils/verifyAuth.js'
+    }
   },
 
   resolveLoader: {
