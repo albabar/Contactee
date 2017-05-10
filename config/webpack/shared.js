@@ -48,6 +48,8 @@ module.exports = {
     ],
     alias: {
       utils: `${paths.entry}/utils`,
+      components: `${paths.entry}/components`,
+      containers: `${paths.entry}/containers`,
       verifyAuth$: 'utils/verifyAuth.js'
     }
   },

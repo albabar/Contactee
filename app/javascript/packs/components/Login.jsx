@@ -2,12 +2,12 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import Redirect from 'react-router-dom/Redirect'
 import Link from 'react-router-dom/Link'
 import post from 'utils/post';
 import verifyGuest from 'utils/verifyGuest';
+import NearMe from 'material-ui/svg-icons/maps/near-me';
 
 export class Login extends React.Component {
   state = { email: '', password: '', remember_me: true, user: null };
@@ -57,7 +57,7 @@ export class Login extends React.Component {
               type="submit"
               label="Login"
               secondary={true}
-              icon={<FontIcon className="muidocs-icon-custom-github" />}
+              icon={<NearMe />}
             />
           </form>
           <Link to="/register">or Register here!</Link>

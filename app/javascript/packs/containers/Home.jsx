@@ -6,15 +6,14 @@ injectTapEventPlugin();
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import 'normalize.css/normalize.css'
-import Contacts from '../components/Contacts'
-import Login from '../components/Login'
-import Index from '../components/Index'
-import Register from '../components/Register'
-import {
-  Route,
-  Link,
-  BrowserRouter,
-} from 'react-router-dom'
+import Route from 'react-router-dom/Route'
+import Link from 'react-router-dom/Link'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
+import Contacts from 'components/Contacts'
+import Login from 'components/Login'
+import HomeIndex from 'components/Index'
+import Register from 'components/Register'
+import GroupIndex from 'components/groups/Index'
 
 export default class extends React.Component {
 
@@ -33,15 +32,17 @@ export default class extends React.Component {
                 <div>
                   <Link to="/login"><FlatButton label="Login" style={buttonStyle} /></Link>
                   <Link to="/contacts"><FlatButton label="Contacts" style={buttonStyle} /></Link>
+                  <Link to="/groups"><FlatButton label="Groups" style={buttonStyle} /></Link>
                 </div>
               }
             >
             </AppBar>
             <div className="row center-xs">
-              <Route exact path="/" component={Index}/>
+              <Route exact path="/" component={HomeIndex}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
               <Route path="/contacts" component={Contacts}/>
+              <Route path="/groups" component={GroupIndex}/>
             </div>
           </div>
         </MuiThemeProvider>
