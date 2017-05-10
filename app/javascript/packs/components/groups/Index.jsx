@@ -1,11 +1,11 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
-import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import post from 'utils/post';
 import get from 'utils/get';
+import patch from 'utils/patch';
 import verifyAuth from 'verifyAuth';
 import Form from './Form';
+import Group from './Group';
 
 export class Index extends React.Component {
   state = { groups: [] };
@@ -22,24 +22,23 @@ export class Index extends React.Component {
       })
   };
 
-  getAllGroups = () => {
-    get('/api/groups').then(groups => this.setState({groups}))
+  updateGroup = (group) => {
+    patch(`/api/groups/${group.slug}`, { group })
+      .then(group => {
+        const index = this.state.groups.findIndex(g => g.id === group.id);
+        if(index > -1) {
+          const groups = [...this.state.groups];
+          groups[index] = group;
+          this.setState({groups})
+        }
+      })
   };
 
-  prepareAllGroups = () => this.state.groups.map(group => (
-    <div className="row start-xs" key={group.id}>
-      <div className="col-xs-10">
-        <h3>{group.name}</h3>
-      </div>
-      <div className="col-xs-2">
-        <FlatButton
-          type="submit"
-          label=""
-          icon={<DeleteForever />}
-        />
-      </div>
-    </div>
-  ));
+  getAllGroups = () => get('/api/groups').then(groups => this.setState({groups}));
+
+  prepareAllGroups = () => this.state.groups.map(
+    group => <Group {...group} update={this.updateGroup} key={group.id} />
+  );
 
   render() {
     return (

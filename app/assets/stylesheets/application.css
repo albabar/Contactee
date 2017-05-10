@@ -14,8 +14,6 @@
  *= require_self
  */
 
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.editable {
+    cursor: pointer;
 }
