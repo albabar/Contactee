@@ -17,8 +17,8 @@ class Contacts extends React.Component {
 
   prepareContactsList = () => this.state.contacts.map(
     contact => (
-      <div className="row start-xs" key={contact.id}>
-        <div className="col-xs">
+      <div className="row start-md" key={contact.id}>
+        <div className="col-md">
           <h3>
             <Link to={`/contacts/${contact.slug}`}>
               {[contact.first_name, contact.last_name].join(' ')}
@@ -32,11 +32,11 @@ class Contacts extends React.Component {
 
   render() {
     return (
-      <div className="col-xs-8">
+      <div className="col-md-8">
         <Paper style={{textAlign: 'center', padding: 30}}>
-          <div className="row start-xs middle-xs">
-            <div className="col-xs-9"><h1>Contact List</h1></div>
-            <div className="col-xs-3">
+          <div className="row start-md middle-md">
+            <div className="col-md-9"><h1>Contact List</h1></div>
+            <div className="col-md-3">
               <Link to="/contacts/new">
                 <RaisedButton
                   label="New Contact"
@@ -49,7 +49,7 @@ class Contacts extends React.Component {
           </div>
         </Paper>
         {this.state.contacts.length > 0 && <Paper style={{textAlign: 'center', padding: 30}}>
-          <div className="row start-xs">{this.prepareContactsList()}</div>
+          {this.prepareContactsList()}
         </Paper>}
       </div>
     )
