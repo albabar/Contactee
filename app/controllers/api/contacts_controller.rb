@@ -44,7 +44,7 @@ class API::ContactsController < API::BaseController
     params.require(:contact).
       permit(:first_name, :last_name, :email, :organization,
              :is_organization, :cellular,:phone, :birthday,
-             :address_line1, :address_line2, :homepage, :notes
+             :address_line1, :address_line2, :homepage, :notes, group_ids: []
       ).merge(user: current_user, slug: nil)
   end
 

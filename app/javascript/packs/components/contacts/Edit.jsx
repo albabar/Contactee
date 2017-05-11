@@ -14,7 +14,7 @@ class Edit extends React.Component {
       first_name: '', last_name: '', email: '', organization: '',
       is_organization: false, cellular: '', phone: '', birthday: null,
       address_line1: '', address_line2: '', homepage: '', notes: '',
-      slug: ''
+      slug: '', group_ids: []
     },
     errors: {},
     doneWithForm: false, newSlug: null,

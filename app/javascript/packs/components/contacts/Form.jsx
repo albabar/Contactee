@@ -5,14 +5,25 @@ import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import DatePicker from 'material-ui/DatePicker';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import Add from 'material-ui/svg-icons/social/group-add';
 import age from 'utils/age';
+import get from 'utils/get';
 
 export class Form extends React.Component {
+  state = { groups: [] };
+
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
   };
+
+  componentWillMount() {
+    this.getAllGroups();
+  }
+
+  getAllGroups = () => get('/api/groups').then(groups => this.setState({groups}));
 
   saveContact = (e) => {
     e.preventDefault();
@@ -54,6 +65,18 @@ export class Form extends React.Component {
     return name.trim() || 'Add new Contact';
   };
 
+  groupChecked = (id) => this.props.group_ids.length > 0 && this.props.group_ids.includes(id);
+  mapGroups = () => this.state.groups.map(
+    group => (
+      <MenuItem
+        value={group.id}
+        key={group.id}
+        primaryText={group.name}
+        checked={this.groupChecked(group.id)}
+      />
+    )
+  );
+
 
   render() {
     const f = this.textField;
@@ -76,6 +99,16 @@ export class Form extends React.Component {
               />
             </div>
           </div>
+          <SelectField
+            multiple={true}
+            floatingLabelText="Group, you can select multiple"
+            value={this.props.group_ids}
+            onChange={(e, index, values) => this.props.onChange('group_ids', values)}
+            fullWidth={true}
+            style={{marginTop: 8}}
+          >
+            {this.mapGroups()}
+          </SelectField>
 
           <div className="row">
             <div className="col-md-6">{f('email', {type: 'email'})}</div>
