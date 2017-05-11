@@ -4,6 +4,7 @@ import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
 import Paper from 'material-ui/Paper';
 import Person from 'material-ui/svg-icons/social/person';
@@ -21,7 +22,7 @@ import moment from 'moment';
 import Redirect from 'react-router-dom/Redirect';
 
 class Contact extends React.Component {
-  state = { _destroy: false, _destroyed: false };
+  state = { _destroy: false, _destroyed: false, groups: [] };
 
   componentWillMount() {
     this.getContact();
@@ -86,8 +87,12 @@ class Contact extends React.Component {
   stopDestroy = () => this.setState({ _destroy: false });
 
   destroy = () => {
-      deleTE(`/api/contacts/${this.slug()}`).then(() => this.setState({_destroyed: true}));
+    deleTE(`/api/contacts/${this.slug()}`).then(() => this.setState({_destroyed: true}));
   };
+
+  renderGroups = () => this.state.groups.map(group => (
+    <Chip key={group.id}><Link to={`/groups/${group.slug}`} >{group.name}</Link></Chip>
+  ));
 
   render() {
     if(this.state._destroyed) {
@@ -128,6 +133,7 @@ class Contact extends React.Component {
             </div>
           </div>
           {this.state.birthday && <div className="row middle-md">{this.birthday()}</div>}
+          {this.state.groups.length > 0 && <div className="row middle-md end-md">{this.renderGroups()}</div>}
         </Paper>
         <Paper style={{padding: 30}}>
           <List>
