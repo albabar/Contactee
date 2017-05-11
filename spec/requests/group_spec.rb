@@ -67,6 +67,18 @@ RSpec.describe 'Group Management', type: :request do
       expect(response).to have_http_status(201)
     end
 
+    context 'invalid data' do
+      let(:api_call) { post '/api/groups', params: { group: {slug: 'Something'} } }
+
+      it 'returns model errors in case of failure' do
+        api_call
+        expect(parsed_response).to be_an(Hash)
+        expect(parsed_response['id']).to be_nil
+        expect(parsed_response['errors']).to be_an(Hash)
+        expect(response).to have_http_status(422)
+      end
+    end
+
     it_behaves_like 'authenticated_endpoint'
   end
 
