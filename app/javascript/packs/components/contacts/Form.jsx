@@ -65,6 +65,7 @@ export class Form extends React.Component {
     return name.trim() || 'Add new Contact';
   };
 
+  submitLabel = () => this.props.id ? 'Update' : 'Create';
   groupChecked = (id) => this.props.group_ids.length > 0 && this.props.group_ids.includes(id);
   mapGroups = () => this.state.groups.map(
     group => (
@@ -144,7 +145,7 @@ export class Form extends React.Component {
 
           <RaisedButton
             type="submit"
-            label="Create"
+            label={this.submitLabel()}
             secondary={true}
             icon={<Add />}
           />
