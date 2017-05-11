@@ -15,5 +15,28 @@
  */
 
 .editable {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+a {
+  color: teal;
+  text-decoration: none;
+}
+
+h3 a {
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+h1 span {
+  margin-left: 20px;
+  font-size: large;
+  font-weight: 400;
+}
+
+h3 span {
+  color: #4DB6AC;
+  margin-left: 20px;
+  font-size: large;
+  font-weight: 400;
 }

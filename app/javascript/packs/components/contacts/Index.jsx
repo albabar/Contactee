@@ -16,7 +16,18 @@ class Contacts extends React.Component {
   getAllContacts = () => get('/api/contacts').then(contacts => this.setState({contacts}));
 
   prepareContactsList = () => this.state.contacts.map(
-    contact => <div className="row start-xs"><div className="col-xs"><h3>{[contact.first_name, contact.last_name].join}</h3></div></div>
+    contact => (
+      <div className="row start-xs" key={contact.id}>
+        <div className="col-xs">
+          <h3>
+            <Link to={`/contacts/${contact.slug}`}>
+              {[contact.first_name, contact.last_name].join(' ')}
+            </Link>
+            <span>{contact.organization}</span>
+          </h3>
+        </div>
+      </div>
+    )
   );
 
   render() {
@@ -28,11 +39,11 @@ class Contacts extends React.Component {
             <div className="col-xs-3">
               <Link to="/contacts/new">
                 <RaisedButton
-                label="New Contact"
-                labelPosition="before"
-                icon={<PersonAdd />}
-                primary={true}
-              />
+                  label="New Contact"
+                  labelPosition="before"
+                  icon={<PersonAdd />}
+                  primary={true}
+                />
               </Link>
             </div>
           </div>

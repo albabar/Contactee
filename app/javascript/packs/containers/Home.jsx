@@ -7,10 +7,12 @@ import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import 'normalize.css/normalize.css'
 import Route from 'react-router-dom/Route'
+import Switch from 'react-router-dom/Switch'
 import Link from 'react-router-dom/Link'
 import BrowserRouter from 'react-router-dom/BrowserRouter'
 import ContactIndex from 'components/contacts/Index'
 import ContactNew from 'components/contacts/New'
+import Contact from 'components/contacts/Contact'
 import Login from 'components/Login'
 import HomeIndex from 'components/Index'
 import Register from 'components/Register'
@@ -42,8 +44,12 @@ export default class extends React.Component {
               <Route exact path="/" component={HomeIndex}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
-              <Route exact path="/contacts" component={ContactIndex}/>
-              <Route path="/contacts/new" component={ContactNew} />
+
+              <Switch>
+                <Route exact path="/contacts" component={ContactIndex}/>
+                <Route exact path="/contacts/new" component={ContactNew} />
+                <Route path="/contacts/:slug" component={Contact} />
+              </Switch>
               <Route path="/groups" component={GroupIndex}/>
             </div>
           </div>
