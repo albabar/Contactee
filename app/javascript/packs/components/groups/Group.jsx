@@ -2,13 +2,17 @@ import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
+import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import get from 'utils/get';
 import patch from 'utils/patch';
 import deleTE from 'utils/deleTE';
+import verifyAuth from 'verifyAuth';
 import Redirect from 'react-router-dom/Redirect';
+import Link from 'react-router-dom/Link';
+import ContactList from '../contacts/ContactList';
 
 
 export class Group extends React.Component {
@@ -102,9 +106,21 @@ export class Group extends React.Component {
             </div>
           </div>
         </Paper>
+        {this.state.group.contacts.length > 0 && <ContactList contacts={this.state.group.contacts} />}
+        {this.state.group.contacts.length === 0 && <Paper style={{textAlign: 'center', padding: 30}}>
+          <h3>No Contacts found.</h3>
+          <Link to="/contacts/new">
+            <RaisedButton
+              label="New Contact"
+              labelPosition="before"
+              icon={<PersonAdd />}
+              primary={true}
+            />
+          </Link>
+        </Paper>}
       </div>
     )
   }
 }
 
-export default Group;
+export default verifyAuth(Group);
