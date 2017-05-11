@@ -29,9 +29,9 @@ RSpec.describe Contact, type: :model do
   context 'API' do
     let(:expect_attributes) do
       %w(
-        id first_name last_name user_id email organization
-        is_organization cellular phone birthday address_line1
-        address_line2 homepage notes slug groups created_at updated_at
+        id first_name last_name user_id email organization notes
+        is_organization cellular phone birthday address_line1 slug
+        address_line2 homepage groups group_ids created_at updated_at
       )
     end
 

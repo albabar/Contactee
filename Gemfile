@@ -11,6 +11,7 @@ gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'devise', github: 'plataformatec/devise'
 gem 'friendly_id'
+gem 'paranoia'
 
 group :development, :test do
   gem 'byebug', platforms: %i(mri mingw x64_mingw)

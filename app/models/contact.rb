@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Contact < ApplicationRecord
+  acts_as_paranoid
   extend FriendlyId
   friendly_id :slug_candidates, use: %i(slugged scoped), scope: :user_id
 
@@ -15,7 +16,7 @@ class Contact < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(options.merge(include: :groups, methods: :group_ids))
+    super(options.merge(include: :groups, methods: :group_ids, except: :deleted_at))
   end
 
   private

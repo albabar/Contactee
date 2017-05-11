@@ -17,6 +17,7 @@ class CreateContacts < ActiveRecord::Migration[5.1]
       t.string :slug, null: false
 
       t.timestamps
+      t.datetime :deleted_at, index: true
 
       t.index %i(email user_id), unique: true
       t.index %i(slug user_id), unique: true
