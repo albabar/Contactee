@@ -25,7 +25,7 @@ class API::ContactsController < API::BaseController
   def update
     @contact.assign_attributes(contact_params)
     body, status = if @contact.save
-                     [@contact.reload, :success]
+                     [@contact.reload, :ok]
                    else
                      [{errors: @contact.errors}, :unprocessable_entity]
                    end

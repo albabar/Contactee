@@ -23,7 +23,9 @@ class Contact extends React.Component {
     this.getContact();
   }
 
-  getContact = () => get(`/api/contacts/${this.props.match.params.slug}`).then(contact => this.setState({...contact}));
+  slug = () => this.props.match.params.slug;
+
+  getContact = () => get(`/api/contacts/${this.slug()}`).then(contact => this.setState({...contact}));
 
   justName = () => [this.state.first_name, this.state.last_name].join(' ').trim();
   name = () => {
@@ -71,9 +73,9 @@ class Contact extends React.Component {
               <h1>{this.name()} <span>{this.subHeader()}</span></h1>
             </div>
             <div className="col-md-3">
-              <Link to="/contacts/new">
+              <Link to={`/contacts/${this.slug()}/edit`}>
                 <RaisedButton
-                  label="New Contact"
+                  label="Edit"
                   labelPosition="before"
                   icon={<Person />}
                   primary={true}
