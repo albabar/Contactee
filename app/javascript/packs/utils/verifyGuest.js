@@ -14,7 +14,7 @@ export function verifyGuest(Component) {
     render() {
       switch(this.state.signed_in) {
         case true:
-          return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>;
+          return <Redirect to={{pathname: '/', state: { from: this.props.location }}}/>;
         case false:
           return <Component {...this.props} {...this.state} />;
         default:

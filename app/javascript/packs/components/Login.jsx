@@ -15,12 +15,14 @@ export class Login extends React.Component {
   authenticate = (e) => {
     e.preventDefault();
     post('/api/users/sign_in', { user: this.state })
-      .then(json => this.setState({user: json}))
+      .then(json => this.setState({user: json})).then(this.update)
   };
+
+  update = () => window.location.pathname = '/';
 
   render() {
     if(this.state.user) {
-      return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: '/', state: { from: this.props.location }}}/>
     }
 
     return (

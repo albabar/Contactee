@@ -40,3 +40,7 @@ h3 span {
   font-size: large;
   font-weight: 400;
 }
+
+a.active button div {
+  background: rebeccapurple;
+}
