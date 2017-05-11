@@ -4,6 +4,7 @@ import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import Paper from 'material-ui/Paper';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import verifyAuth from 'verifyAuth';
@@ -17,11 +18,10 @@ class Contacts extends React.Component {
     this.getAllContacts();
   }
 
-  match = (str) => str.toLowerCase().indexOf(this.state.s) > -1
+  match = (str) => AutoComplete.fuzzyFilter(this.state.s, str);
+  searchContact = (contact) => ['first_name', 'last_name'].some(prop => this.match(contact[prop]));
   getAllContacts = () => get('/api/contacts').then(contacts => this.setState({contacts}));
-  contacts = () => this.state.contacts.filter(
-    contact => this.match(contact.first_name) || this.match(contact.last_name)
-  );
+  contacts = () => this.state.contacts.filter(this.searchContact);
 
   prepareContactsList = () => this.contacts().map(
     contact => (

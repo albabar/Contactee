@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import Redirect from 'react-router-dom/Redirect';
 import verifyAuth from 'verifyAuth';
 import post from 'utils/postWithOutStatusCheck';
