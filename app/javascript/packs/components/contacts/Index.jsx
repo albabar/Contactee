@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'react-router-dom/Link'
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import verifyAuth from 'verifyAuth';
 import get from 'utils/get';
+import gravatar from 'utils/gravatar';
 
 class Contacts extends React.Component {
   state = { contacts: [] };
@@ -17,16 +20,13 @@ class Contacts extends React.Component {
 
   prepareContactsList = () => this.state.contacts.map(
     contact => (
-      <div className="row start-md" key={contact.id}>
-        <div className="col-md">
-          <h3>
-            <Link to={`/contacts/${contact.slug}`}>
-              {[contact.first_name, contact.last_name].join(' ')}
-            </Link>
-            <span>{contact.organization}</span>
-          </h3>
-        </div>
-      </div>
+      <Link to={`/contacts/${contact.slug}`} key={contact.id}>
+        <ListItem
+          rightAvatar={gravatar(contact.email)}
+          primaryText={[contact.first_name, contact.last_name].join(' ')}
+          secondaryText={contact.organization || contact.email}
+        />
+      </Link>
     )
   );
 
@@ -48,8 +48,8 @@ class Contacts extends React.Component {
             </div>
           </div>
         </Paper>
-        {this.state.contacts.length > 0 && <Paper style={{textAlign: 'center', padding: 30}}>
-          {this.prepareContactsList()}
+        {this.state.contacts.length > 0 && <Paper style={{textAlign: 'left', padding: 30}}>
+          <List>{this.prepareContactsList()}</List>
         </Paper>}
       </div>
     )
