@@ -19,7 +19,8 @@ class ContactList extends React.Component {
   };
 
   match = (str) => AutoComplete.fuzzyFilter(this.state.s, str);
-  searchContact = (contact) => ['first_name', 'last_name'].some(prop => this.match(contact[prop]));
+  searchName = (contact) => this.match([contact.first_name, contact.last_name].join(' '));
+  searchContact = (contact) => this.searchName(contact) || ['email', 'organization'].some(prop => this.match(contact[prop] || ''));
   contacts = () => this.props.contacts.filter(this.searchContact);
 
   prepareContactsList = () => this.contacts().map(
