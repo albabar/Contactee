@@ -12,12 +12,25 @@ class API::ContactsController < API::BaseController
   end
 
   def create
-    render json: current_user.contacts.create!(contact_params), status: :created
+    contact = current_user.contacts.create(contact_params)
+    body, status = if contact.id
+                     [contact, :created]
+                   else
+                     [{errors: contact.errors}, :unprocessable_entity]
+                   end
+
+    render json: body, status: status
   end
 
   def update
-    @contact.update! contact_params
-    render json: @contact.reload
+    @contact.assign_attributes(contact_params)
+    body, status = if @contact.save
+                     [@contact.reload, :success]
+                   else
+                     [{errors: @contact.errors}, :unprocessable_entity]
+                   end
+
+    render json: body, status: status
   end
 
   def destroy

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'react-router-dom/Link'
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
@@ -25,12 +26,14 @@ class Contacts extends React.Component {
           <div className="row start-xs middle-xs">
             <div className="col-xs-9"><h1>Contact List</h1></div>
             <div className="col-xs-3">
-              <RaisedButton
+              <Link to="/contacts/new">
+                <RaisedButton
                 label="New Contact"
                 labelPosition="before"
                 icon={<PersonAdd />}
                 primary={true}
               />
+              </Link>
             </div>
           </div>
         </Paper>
