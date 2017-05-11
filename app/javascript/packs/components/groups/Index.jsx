@@ -2,11 +2,12 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import post from 'utils/post';
 import get from 'utils/get';
-import patch from 'utils/patch';
-import deleTE from 'utils/deleTE';
 import verifyAuth from 'verifyAuth';
 import Form from './Form';
-import Group from './Group';
+import Link from 'react-router-dom/Link'
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import GroupIcon from 'material-ui/svg-icons/social/group';
 
 export class Index extends React.Component {
   state = { groups: [] };
@@ -23,38 +24,27 @@ export class Index extends React.Component {
       })
   };
 
-  updateGroup = (group) => {
-    patch(`/api/groups/${group.slug}`, { group })
-      .then(group => {
-        const index = this.state.groups.findIndex(g => g.id === group.id);
-        if(index > -1) {
-          const groups = [...this.state.groups];
-          groups[index] = group;
-          this.setState({groups})
-        }
-      })
-  };
-
-  deleteGroup = (groupId) => {
-    deleTE(`/api/groups/${this.state.groups.find(g => g.id === groupId).slug}`)
-      .then(() => {
-        this.setState({groups: this.state.groups.filter(g => g.id !== groupId)})
-      })
-  };
-
   getAllGroups = () => get('/api/groups').then(groups => this.setState({groups}));
 
   prepareAllGroups = () => this.state.groups.map(
-    group => <Group {...group} update={this.updateGroup} destroy={this.deleteGroup} key={group.id} />
+    group => (
+      <Link to={`/groups/${group.slug}`} key={group.id}>
+        <ListItem
+          rightIcon={<GroupIcon />}
+          primaryText={group.name}
+          secondaryText={`${group.contacts.length} contacts`}
+        />
+      </Link>
+    )
   );
 
   render() {
     return (
       <div className="col-xs-5">
         <Form onSubmit={this.saveGroup} />
-        {this.state.groups.length > 0 && <Paper style={{textAlign: 'center', padding: 30}}>
+        {this.state.groups.length > 0 && <Paper style={{textAlign: 'left', padding: 30}}>
           <h1>All groups</h1>
-          {this.prepareAllGroups()}
+          <List>{this.prepareAllGroups()}</List>
         </Paper>}
       </div>
     )

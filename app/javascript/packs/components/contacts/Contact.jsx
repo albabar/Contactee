@@ -24,8 +24,6 @@ class Contact extends React.Component {
   state = { _destroy: false, _destroyed: false };
 
   componentWillMount() {
-    window.Contact = this;
-    window.moment = moment;
     this.getContact();
   }
 

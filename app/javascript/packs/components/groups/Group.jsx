@@ -1,21 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
+import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
+import get from 'utils/get';
+import patch from 'utils/patch';
+import deleTE from 'utils/deleTE';
+import Redirect from 'react-router-dom/Redirect';
 
 
 export class Group extends React.Component {
-  state = { name: this.props.name, editing: false, destroy: false };
+  state = { group: { name: '', contacts: [] }, editing: false, destroy: false, _destroyed: false, oldName: '', newSlug: '' };
+  componentWillMount() {
+    this.getContact();
+  }
 
-  static propTypes = {
-    id: PropTypes.number.isRequired,
-    slug: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    update: PropTypes.func.isRequired,
-    destroy: PropTypes.func.isRequired,
-  };
+  getContact = () => get(`/api/groups/${this.slug()}`).then(group => this.setState({group}));
 
   destroyConfirmActions = () => [
     <FlatButton
@@ -30,14 +32,15 @@ export class Group extends React.Component {
     />,
   ];
 
-  startEditing = () => this.setState({ editing: true });
-  resetEditing = () => this.setState({ name: this.props.name, editing: false });
+  slug = () => this.props.match.params.slug;
+  startEditing = () => this.setState({ editing: true, oldName: this.state.group.name });
+  resetEditing = () => this.setState({ group: {...this.state.group, name: this.state.oldName}, editing: false });
   startDestroy = () => this.setState({ destroy: true });
   stopDestroy = () => this.setState({ destroy: false });
   saveGroup = (e) => {
     switch(e.keyCode){
       case 13:
-        this.props.update({id: this.props.id, slug: this.props.slug, name: this.state.name});
+        this.updateGroup();
         this.resetEditing();
         break;
       case 27:
@@ -49,41 +52,56 @@ export class Group extends React.Component {
   };
 
   destroy = () => {
-    this.props.destroy(this.props.id);
-    this.stopDestroy()
+    deleTE(`/api/groups/${this.slug()}`).then(() => this.setState({_destroyed: true}));
+  };
+
+  updateGroup = () => {
+    patch(`/api/groups/${this.slug()}`, { group: this.state.group })
+      .then(group => this.setState({newSlug: group.slug, group}))
   };
 
   render() {
+    if(this.state.newSlug !== '' && this.state.newSlug !== this.slug()) {
+      return <Redirect to={{pathname: `/groups/${this.state.newSlug}`, state: { from: this.props.location }}}/>
+    } else if(this.state._destroyed) {
+      return <Redirect to={{pathname: `/groups`, state: { from: this.props.location }}}/>
+    }
+
     return (
-      <div className="row start-xs">
-        <div className="col-xs-10">
-          {!this.state.editing && <h3 onClick={this.startEditing} className="editable">{this.props.name}</h3>}
-          {this.state.editing && <TextField
-            hintText={this.props.name}
-            floatingLabelText={`New name for ${this.props.name}`}
-            type="text"
-            value={this.state.name}
-            onChange={e => this.setState({name: e.target.value})}
-            autoFocus={true}
-            onKeyUp={this.saveGroup}
-          />}
-        </div>
-        <div className="col-xs-2">
-          <FlatButton
-            type="submit"
-            label=""
-            icon={<DeleteForever />}
-            onClick={this.startDestroy}
-          />
-          <Dialog
-            actions={this.destroyConfirmActions()}
-            modal={false}
-            open={this.state.destroy}
-            onRequestClose={this.stopDestroy}
-          >
-            {`Delete the group ${this.props.name}`}
-          </Dialog>
-        </div>
+      <div className="col-md-8 start-md">
+        <Paper style={{padding: 30}}>
+          <div className="row middle-md">
+            <div className="col-md-10">
+              {!this.state.editing && <h3 onClick={this.startEditing} className="editable">All contacts for {this.state.group.name}</h3>}
+              {this.state.editing && <TextField
+                hintText={this.state.group.name}
+                floatingLabelText={`New name for ${this.state.group.name}`}
+                type="text"
+                value={this.state.group.name}
+                onChange={e => this.setState({group: {...this.state.group, name: e.target.value}})}
+                autoFocus={true}
+                onKeyUp={this.saveGroup}
+              />}
+            </div>
+            <div className="col-md-2">
+              <RaisedButton
+                secondary={true}
+                label="Delete"
+                labelPosition="before"
+                icon={<DeleteForever />}
+                onClick={this.startDestroy}
+              />
+              <Dialog
+                actions={this.destroyConfirmActions()}
+                modal={false}
+                open={this.state.destroy}
+                onRequestClose={this.stopDestroy}
+              >
+                {`Delete the group ${this.state.group.name}`}
+              </Dialog>
+            </div>
+          </div>
+        </Paper>
       </div>
     )
   }

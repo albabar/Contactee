@@ -18,6 +18,7 @@ import Login from 'components/Login'
 import HomeIndex from 'components/Index'
 import Register from 'components/Register'
 import GroupIndex from 'components/groups/Index'
+import Group from 'components/groups/Group'
 
 export default class extends React.Component {
 
@@ -52,7 +53,8 @@ export default class extends React.Component {
                 <Route exact path="/contacts/:slug" component={Contact} />
                 <Route exact path="/contacts/:slug/edit" component={ContactEdit} />
               </Switch>
-              <Route path="/groups" component={GroupIndex}/>
+              <Route exact path="/groups" component={GroupIndex}/>
+              <Route exact path="/groups/:slug" component={Group} />
             </div>
           </div>
         </MuiThemeProvider>
