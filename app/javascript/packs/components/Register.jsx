@@ -17,8 +17,10 @@ export class Register extends React.Component {
   register = (e) => {
     e.preventDefault();
     post('/api/users', { user: this.state })
-      .then(json => this.setState({user: json}));
+      .then(json => this.setState({user: json})).then(this.update);
   };
+
+  update = () => window.location.pathname = '/';
 
   render() {
     if(this.state.user) {
