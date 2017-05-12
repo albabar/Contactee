@@ -68,7 +68,7 @@ class Home extends React.Component {
               iconElementRight={this.navLinks()}
             >
             </AppBar>
-            <div className="row center-xs">
+            <div className="row center-md center-sm center-xs">
               <Route exact path="/" component={this.homeComponent()}/>
               <Route path="/login" component={Login}/>
               <Route path="/logout" component={Logout}/>

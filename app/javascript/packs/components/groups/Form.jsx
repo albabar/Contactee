@@ -20,8 +20,8 @@ export class Form extends React.Component {
       <Paper style={{textAlign: 'center', padding: 30}}>
         <h1>Create new group</h1>
         <form onSubmit={this.saveGroup}>
-          <div className="row bottom-xs">
-            <div className="col-xs-8">
+          <div className="row bottom-md">
+            <div className="col-md-8">
               <TextField
                 hintText="Group name"
                 floatingLabelText="New group name"
@@ -30,7 +30,7 @@ export class Form extends React.Component {
                 onChange={e => this.setState({name: e.target.value})}
               />
             </div>
-            <div className="col-xs-4">
+            <div className="col-md-4">
               <RaisedButton
                 type="submit"
                 label="Create"

@@ -85,18 +85,19 @@ export class Form extends React.Component {
     return (
       <Paper style={{textAlign: 'center', padding: 30}}>
         <h1>{this.title()}</h1>
-        <form onSubmit={this.saveContact} className="start-md">
+        <form onSubmit={this.saveContact} className="start-md start-xs">
           <div className="row">
-            <div className="col-md-6">{f('first_name')}</div>
-            <div className="col-md-6">{f('last_name')}</div>
+            <div className="col-md-6 col-xs-6">{f('first_name')}</div>
+            <div className="col-md-6 col-xs-6">{f('last_name')}</div>
           </div>
-          <div className="row bottom-md">
-            <div className="col-md-9">{f('organization', 'Organization Name')}</div>
+          <div className="row bottom-md bottom-xs bottom-sm">
+            <div className="col-md-9 col-xs-9">{f('organization', 'Organization Name')}</div>
             <div className="col-md-3">
               <Toggle
                 label="Organization?"
                 labelPosition="right"
                 onToggle={() => this.props.onChange('is_organization', !this.props.is_organization)}
+                toggled={this.props.is_organization}
               />
             </div>
           </div>
@@ -112,18 +113,18 @@ export class Form extends React.Component {
           </SelectField>
 
           <div className="row">
-            <div className="col-md-6">{f('email', {type: 'email'})}</div>
-            <div className="col-md-6">{f('homepage', {type: 'url'})}</div>
+            <div className="col-md-6 col-xs-6">{f('email', {type: 'email'})}</div>
+            <div className="col-md-6 col-xs-6">{f('homepage', {type: 'url'})}</div>
           </div>
 
 
           <div className="row">
-            <div className="col-md-6">{f('cellular', {type: 'tel'})}</div>
-            <div className="col-md-6">{f('phone', {type: 'tel'})}</div>
+            <div className="col-md-6 col-xs-6">{f('cellular', {type: 'tel'})}</div>
+            <div className="col-md-6 col-xs-6">{f('phone', {type: 'tel'})}</div>
           </div>
 
-          <div className="row bottom-md">
-            <div className="col-md">
+          <div className="row bottom-md bottom-xs">
+            <div className="col-md col-xs">
               <DatePicker
                 hintText="Birthday"
                 floatingLabelText="Birthday"

@@ -40,7 +40,7 @@ export class Index extends React.Component {
 
   render() {
     return (
-      <div className="col-xs-5">
+      <div className="col-md-5">
         <Form onSubmit={this.saveGroup} />
         {this.state.groups.length > 0 && <Paper style={{textAlign: 'left', padding: 30}}>
           <h1>All groups</h1>

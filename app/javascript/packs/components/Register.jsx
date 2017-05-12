@@ -23,32 +23,34 @@ export class Register extends React.Component {
     }
 
     return (
-      <div className="col-xs-5">
+      <div className="col-md-5 col-xs-11 col-sm-8">
         <Paper style={{textAlign: 'center', padding: 30}}>
           <h1>Register</h1>
           <form onSubmit={this.register}>
             <div className="row">
-              <div className="col-xs-5">
+              <div className="col-md-6 col-sm-6 col-xs-6">
                 <TextField
                   hintText="First name"
                   floatingLabelText="First name"
                   type="text"
                   value={this.state.first_name}
                   onChange={e => this.setState({first_name: e.target.value})}
+                  fullWidth={true}
                 />
               </div>
-              <div className="col-xs-5">
+              <div className="col-md-6 col-sm-6 col-xs-6">
                 <TextField
                   hintText="Last name"
                   floatingLabelText="Last name"
                   type="text"
                   value={this.state.last_name}
                   onChange={e => this.setState({last_name: e.target.value})}
+                  fullWidth={true}
                 />
               </div>
             </div>
             <div className="row">
-              <div className="col-xs">
+              <div className="col-md col-xs">
                 <TextField
                   hintText="Email"
                   floatingLabelText="Email to login"
@@ -60,22 +62,24 @@ export class Register extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-5">
+              <div className="col-md-6 col-sm-6 col-xs-6">
                 <TextField
                   hintText="Password"
                   floatingLabelText="Password"
                   type="password"
                   value={this.state.password}
                   onChange={e => this.setState({password: e.target.value})}
+                  fullWidth={true}
                 />
               </div>
-              <div className="col-xs-5">
+              <div className="col-md-6 col-sm-6 col-xs-6">
                 <TextField
                   hintText="Password again"
                   floatingLabelText="Password again"
                   type="password"
                   value={this.state.password_confirmation}
                   onChange={e => this.setState({password_confirmation: e.target.value})}
+                  fullWidth={true}
                 />
               </div>
             </div>

@@ -26,7 +26,7 @@ export class Login extends React.Component {
     }
 
     return (
-      <div className="col-xs-5">
+      <div className="col-md-5 col-sm-9 col-xs-11">
         <Paper style={{textAlign: 'center', padding: 30}}>
           <h1>Login</h1>
           <form onSubmit={this.authenticate}>
@@ -45,12 +45,13 @@ export class Login extends React.Component {
               onChange={e => this.setState({password: e.target.value})}
             />
             <br/>
-            <div className="col-xs-5 col-xs-offset-2">
+            <div className="col-md-4 col-md-offset-4 col-xs-offset-4 col-sm-offset-4">
               <Toggle
                 label="Remember Me"
                 labelPosition="right"
                 toggled={this.state.remember_me}
                 onToggle={e => this.setState({remember_me: !this.state.remember_me})}
+                style={{maxWidth: 153}}
               />
             </div>
             <br/>
