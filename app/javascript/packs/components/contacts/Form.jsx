@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -17,6 +17,14 @@ export class Form extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    errors: PropTypes.objectOf(PropTypes.array),
+    is_organization: PropTypes.bool,
+    organization: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    id: PropTypes.number,
+    birthday: PropTypes.oneOf([PropTypes.instanceOf(Date), PropTypes.string]),
+    group_ids: PropTypes.arrayOf(PropTypes.number),
   };
 
   componentWillMount() {
@@ -52,7 +60,7 @@ export class Form extends React.Component {
       fullWidth={true}
       errorText={this.props.errors[prop]}
       {...options}
-    />
+    />;
   };
 
   title = () => {
@@ -152,7 +160,7 @@ export class Form extends React.Component {
           />
         </form>
       </Paper>
-    )
+    );
   }
 }
 

@@ -1,4 +1,5 @@
 module.exports = {
+  'parser': 'babel-eslint',
   'env': {
     'browser': true,
     'commonjs': true,
@@ -6,10 +7,11 @@ module.exports = {
   },
   'extends': [
     'eslint:recommended',
-    'plugin:promise/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:jsx-a11y/recommended',
+    // 'plugin:promise/recommended',
+    // 'plugin:import/errors',
+    // 'plugin:import/warnings',
+    // 'plugin:jsx-a11y/recommended',
+    'plugin:react/recommended',
   ],
   'parserOptions': {
     'ecmaFeatures': {

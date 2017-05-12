@@ -1,25 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-import Redirect from 'react-router-dom/Redirect'
-import Link from 'react-router-dom/Link'
+import Redirect from 'react-router-dom/Redirect';
+import Link from 'react-router-dom/Link';
 import post from 'utils/post';
 import verifyGuest from 'utils/verifyGuest';
 
 export class Register extends React.Component {
+  static propTypes = { location: PropTypes.object };
+
   state = { first_name: '', last_name: '', email: '', password: '', password_confirmation: '', user: null };
 
   register = (e) => {
     e.preventDefault();
     post('/api/users', { user: this.state })
-      .then(json => this.setState({user: json}))
+      .then(json => this.setState({user: json}));
   };
 
   render() {
     if(this.state.user) {
-      return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>;
     }
 
     return (
@@ -94,7 +97,7 @@ export class Register extends React.Component {
           <Link to="/login">or Login here!</Link>
         </Paper>
       </div>
-    )
+    );
   }
 }
 

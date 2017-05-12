@@ -1,28 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import Redirect from 'react-router-dom/Redirect'
-import Link from 'react-router-dom/Link'
+import Redirect from 'react-router-dom/Redirect';
+import Link from 'react-router-dom/Link';
 import post from 'utils/post';
 import verifyGuest from 'utils/verifyGuest';
 import NearMe from 'material-ui/svg-icons/maps/near-me';
 
 export class Login extends React.Component {
+  static propTypes = { location: PropTypes.object };
   state = { email: '', password: '', remember_me: true, user: null };
 
   authenticate = (e) => {
     e.preventDefault();
     post('/api/users/sign_in', { user: this.state })
-      .then(json => this.setState({user: json})).then(this.update)
+      .then(json => this.setState({user: json})).then(this.update);
   };
 
   update = () => window.location.pathname = '/';
 
   render() {
     if(this.state.user) {
-      return <Redirect to={{pathname: '/', state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: '/', state: { from: this.props.location }}}/>;
     }
 
     return (
@@ -50,7 +52,7 @@ export class Login extends React.Component {
                 label="Remember Me"
                 labelPosition="right"
                 toggled={this.state.remember_me}
-                onToggle={e => this.setState({remember_me: !this.state.remember_me})}
+                onToggle={() => this.setState({remember_me: !this.state.remember_me})}
                 style={{maxWidth: 153}}
               />
             </div>
@@ -65,7 +67,7 @@ export class Login extends React.Component {
           <Link to="/register">or Register here!</Link>
         </Paper>
       </div>
-    )
+    );
   }
 }
 

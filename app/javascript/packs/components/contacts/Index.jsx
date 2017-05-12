@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'react-router-dom/Link'
+import Link from 'react-router-dom/Link';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
@@ -36,7 +36,7 @@ class Contacts extends React.Component {
         </Paper>
         {this.state.contacts.length > 0 && <ContactList contacts={this.state.contacts} />}
       </div>
-    )
+    );
   }
 }
 

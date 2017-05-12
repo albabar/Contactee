@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom/Link'
+import Link from 'react-router-dom/Link';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import TextField from 'material-ui/TextField';
@@ -47,7 +47,7 @@ class ContactList extends React.Component {
         />
         <List>{this.prepareContactsList()}</List>
       </Paper>
-    )
+    );
   }
 }
 

@@ -3,8 +3,10 @@ import Redirect from 'react-router-dom/Redirect';
 import verifyAuth from 'verifyAuth';
 import post from 'utils/postWithOutStatusCheck';
 import Form from './Form';
+import PropTypes from 'prop-types';
 
 class New extends React.Component {
+  static propTypes = { location: PropTypes.object };
 
   state = {
     contact: {
@@ -20,23 +22,23 @@ class New extends React.Component {
   saveContact = () => {
     post('/api/contacts', { contact: this.state.contact }).then(contact => {
       if(contact.errors) {
-        this.setState({errors: contact.errors})
+        this.setState({errors: contact.errors});
       } else {
-        this.setState({ doneWithForm: true })
+        this.setState({ doneWithForm: true });
       }
-    })
+    });
   };
 
   render() {
     if(this.state.doneWithForm) {
-      return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: '/contacts', state: { from: this.props.location }}}/>;
     }
 
     return (
       <div className="col-md-8">
         <Form onSubmit={this.saveContact} onChange={this.updateContact} errors={this.state.errors} {...this.state.contact} />
       </div>
-    )
+    );
   }
 }
 

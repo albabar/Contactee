@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'react-router-dom/Link'
+import Link from 'react-router-dom/Link';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,10 +9,10 @@ import Dialog from 'material-ui/Dialog';
 import Paper from 'material-ui/Paper';
 import Person from 'material-ui/svg-icons/social/person';
 import Phone from 'material-ui/svg-icons/communication/phone';
-import {indigo500, red500} from 'material-ui/styles/colors';
+import {indigo500} from 'material-ui/styles/colors';
 import Email from 'material-ui/svg-icons/communication/email';
 import Web from 'material-ui/svg-icons/social/share';
-import DeleteForever from 'material-ui/svg-icons/action/delete-forever'
+import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import Divider from 'material-ui/Divider';
 import verifyAuth from 'verifyAuth';
 import get from 'utils/get';
@@ -20,8 +20,16 @@ import deleTE from 'utils/deleTE';
 import calculateAge from 'utils/age';
 import moment from 'moment';
 import Redirect from 'react-router-dom/Redirect';
+import PropTypes from 'prop-types';
 
 class Contact extends React.Component {
+  static propTypes = {
+    location: PropTypes.object,
+    match: PropTypes.shape({params: PropTypes.shape({
+      slug: PropTypes.string.isRequired,
+    })})
+  };
+
   state = { _destroy: false, _destroyed: false, groups: [] };
 
   componentWillMount() {
@@ -50,7 +58,7 @@ class Contact extends React.Component {
 
   birthday = () => {
     if(!this.state.birthday) return null;
-    const b = moment(this.state.birthday, "YYYY-MM-DD");
+    const b = moment(this.state.birthday, 'YYYY-MM-DD');
     const t = moment();
     const age = calculateAge(this.state.birthday);
     const name = this.state.first_name;
@@ -75,11 +83,13 @@ class Contact extends React.Component {
       label="Cancel"
       primary={true}
       onTouchTap={this.stopDestroy}
+      key="cancel"
     />,
     <FlatButton
-      label="Discard"
+      label="Delete"
       secondary={true}
       onTouchTap={this.destroy}
+      key="Delete"
     />,
   ];
 
@@ -170,7 +180,7 @@ class Contact extends React.Component {
           <p>{this.state.note}</p>
         </Paper>}
       </div>
-    )
+    );
   }
 }
 

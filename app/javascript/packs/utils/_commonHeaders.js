@@ -5,7 +5,7 @@ export function commonHeaders(extraHeaders = {}) {
     'X-CSRF-Token': authenticityToken,
     'Accept': 'application/json',
     'Content-Type': 'application/json'
-  }, extraHeaders)
+  }, extraHeaders);
 }
 
 export default commonHeaders;

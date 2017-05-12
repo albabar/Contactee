@@ -4,7 +4,7 @@ import post from 'utils/post';
 import get from 'utils/get';
 import verifyAuth from 'verifyAuth';
 import Form from './Form';
-import Link from 'react-router-dom/Link'
+import Link from 'react-router-dom/Link';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import GroupIcon from 'material-ui/svg-icons/social/group';
@@ -20,8 +20,8 @@ export class Index extends React.Component {
     post('/api/groups', { group })
       .then(group => {
         if(group.id)
-          this.setState({groups: [...this.state.groups, group]})
-      })
+          this.setState({groups: [...this.state.groups, group]});
+      });
   };
 
   getAllGroups = () => get('/api/groups').then(groups => this.setState({groups}));
@@ -47,7 +47,7 @@ export class Index extends React.Component {
           <List>{this.prepareAllGroups()}</List>
         </Paper>}
       </div>
-    )
+    );
   }
 }
 

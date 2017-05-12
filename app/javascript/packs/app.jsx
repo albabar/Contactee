@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Home from './containers/Home'
+import Home from './containers/Home';
 import 'flexboxgrid';
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -5,22 +5,22 @@ injectTapEventPlugin();
 
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
-import 'normalize.css/normalize.css'
-import Route from 'react-router-dom/Route'
-import Switch from 'react-router-dom/Switch'
-import Link from 'react-router-dom/Link'
-import NavLink from 'react-router-dom/NavLink'
-import BrowserRouter from 'react-router-dom/BrowserRouter'
-import ContactIndex from 'components/contacts/Index'
-import ContactNew from 'components/contacts/New'
-import ContactEdit from 'components/contacts/Edit'
-import Contact from 'components/contacts/Contact'
-import Login from 'components/Login'
-import Logout from 'components/Logout'
-import HomeIndex from 'components/Index'
-import Register from 'components/Register'
-import GroupIndex from 'components/groups/Index'
-import Group from 'components/groups/Group'
+import 'normalize.css/normalize.css';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import Link from 'react-router-dom/Link';
+import NavLink from 'react-router-dom/NavLink';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
+import ContactIndex from 'components/contacts/Index';
+import ContactNew from 'components/contacts/New';
+import ContactEdit from 'components/contacts/Edit';
+import Contact from 'components/contacts/Contact';
+import Login from 'components/Login';
+import Logout from 'components/Logout';
+import HomeIndex from 'components/Index';
+import Register from 'components/Register';
+import GroupIndex from 'components/groups/Index';
+import Group from 'components/groups/Group';
 import get from 'utils/get';
 
 class Home extends React.Component {
@@ -45,14 +45,14 @@ class Home extends React.Component {
           <NavLink to="/logout"><FlatButton label="Logout" style={buttonStyle} /></NavLink>
 
         </div>
-      )
+      );
     } else {
       return (
         <div>
           <NavLink to="/login"><FlatButton label="Login" style={buttonStyle} /></NavLink>
           <NavLink to="/register"><FlatButton label="Register" style={buttonStyle} /></NavLink>
         </div>
-      )
+      );
     }
   };
 

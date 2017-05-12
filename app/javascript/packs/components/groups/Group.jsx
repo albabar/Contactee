@@ -13,9 +13,16 @@ import verifyAuth from 'verifyAuth';
 import Redirect from 'react-router-dom/Redirect';
 import Link from 'react-router-dom/Link';
 import ContactList from '../contacts/ContactList';
-
+import PropTypes from 'prop-types';
 
 export class Group extends React.Component {
+  static propTypes = {
+    location: PropTypes.object,
+    match: PropTypes.shape({params: PropTypes.shape({
+      slug: PropTypes.string.isRequired,
+    })})
+  };
+
   state = { group: { name: '', contacts: [] }, editing: false, destroy: false, _destroyed: false, oldName: '', newSlug: '' };
   componentWillMount() {
     this.getContact();
@@ -28,11 +35,13 @@ export class Group extends React.Component {
       label="Cancel"
       primary={true}
       onTouchTap={this.stopDestroy}
+      key="cancel"
     />,
     <FlatButton
-      label="Discard"
+      label="Delete"
       secondary={true}
       onTouchTap={this.destroy}
+      key="delete"
     />,
   ];
 
@@ -43,15 +52,15 @@ export class Group extends React.Component {
   stopDestroy = () => this.setState({ destroy: false });
   saveGroup = (e) => {
     switch(e.keyCode){
-      case 13:
-        this.updateGroup();
-        this.resetEditing();
-        break;
-      case 27:
-        this.resetEditing();
-        break;
-      default:
-        break;
+    case 13:
+      this.updateGroup();
+      this.resetEditing();
+      break;
+    case 27:
+      this.resetEditing();
+      break;
+    default:
+      break;
     }
   };
 
@@ -61,14 +70,14 @@ export class Group extends React.Component {
 
   updateGroup = () => {
     patch(`/api/groups/${this.slug()}`, { group: this.state.group })
-      .then(group => this.setState({newSlug: group.slug, group}))
+      .then(group => this.setState({newSlug: group.slug, group}));
   };
 
   render() {
     if(this.state.newSlug !== '' && this.state.newSlug !== this.slug()) {
-      return <Redirect to={{pathname: `/groups/${this.state.newSlug}`, state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: `/groups/${this.state.newSlug}`, state: { from: this.props.location }}}/>;
     } else if(this.state._destroyed) {
-      return <Redirect to={{pathname: `/groups`, state: { from: this.props.location }}}/>
+      return <Redirect to={{pathname: '/groups', state: { from: this.props.location }}}/>;
     }
 
     return (
@@ -119,7 +128,7 @@ export class Group extends React.Component {
           </Link>
         </Paper>}
       </div>
-    )
+    );
   }
 }
 
