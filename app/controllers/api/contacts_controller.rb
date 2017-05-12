@@ -16,7 +16,7 @@ class API::ContactsController < API::BaseController
     body, status = if contact.id
                      [contact, :created]
                    else
-                     [{errors: contact.errors}, :unprocessable_entity]
+                     [{ errors: contact.errors }, :unprocessable_entity]
                    end
 
     render json: body, status: status
@@ -27,7 +27,7 @@ class API::ContactsController < API::BaseController
     body, status = if @contact.save
                      [@contact.reload, :ok]
                    else
-                     [{errors: @contact.errors}, :unprocessable_entity]
+                     [{ errors: @contact.errors }, :unprocessable_entity]
                    end
 
     render json: body, status: status
@@ -41,11 +41,11 @@ class API::ContactsController < API::BaseController
   private
 
   def contact_params
-    params.require(:contact).
-      permit(:first_name, :last_name, :email, :organization,
-             :is_organization, :cellular,:phone, :birthday,
-             :address_line1, :address_line2, :homepage, :notes, group_ids: []
-      ).merge(user: current_user, slug: nil)
+    params.require(:contact).permit(
+      :first_name, :last_name, :email, :organization,
+      :is_organization, :cellular, :phone, :birthday,
+      :address_line1, :address_line2, :homepage, :notes, group_ids: []
+    ).merge(user: current_user, slug: nil)
   end
 
   def find_contact

@@ -28,11 +28,11 @@ RSpec.describe Contact, type: :model do
 
   context 'API' do
     let(:expect_attributes) do
-      %w(
+      %w{
         id first_name last_name user_id email organization notes
         is_organization cellular phone birthday address_line1 slug
         address_line2 homepage groups group_ids created_at updated_at
-      )
+      }
     end
 
     it 'serialize in JSON with all required attributes' do

@@ -68,7 +68,7 @@ RSpec.describe 'Group Management', type: :request do
     end
 
     context 'invalid data' do
-      let(:api_call) { post '/api/groups', params: { group: {slug: 'Something'} } }
+      let(:api_call) { post '/api/groups', params: { group: { slug: 'Some' } } }
 
       it 'returns model errors in case of failure' do
         api_call

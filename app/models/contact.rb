@@ -16,7 +16,9 @@ class Contact < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(options.merge(include: :groups, methods: :group_ids, except: :deleted_at))
+    super(options.merge(
+      include: :groups, methods: :group_ids, except: :deleted_at
+    ))
   end
 
   private

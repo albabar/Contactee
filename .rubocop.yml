@@ -41,3 +41,6 @@ Style/DotPosition:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false

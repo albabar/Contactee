@@ -16,7 +16,7 @@ class API::GroupsController < API::BaseController
     body, status = if group.id
                      [group, :created]
                    else
-                     [{errors: group.errors}, :unprocessable_entity]
+                     [{ errors: group.errors }, :unprocessable_entity]
                    end
 
     render json: body, status: status

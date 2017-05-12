@@ -68,7 +68,7 @@ RSpec.describe 'Contact API Endpoints', type: :request do
     end
 
     context 'invalid data' do
-      let(:contact_attributes) { { contact: {first_name: 'Something'} } }
+      let(:contact_attributes) { { contact: { first_name: 'Something' } } }
 
       it 'returns model errors in case of failure' do
         api_call
@@ -91,13 +91,14 @@ RSpec.describe 'Contact API Endpoints', type: :request do
       expect(parsed_response).to be_an(Hash)
       expect(parsed_response['id']).to eq(contact.id)
       expect(parsed_response['organization']).to eq(contact.reload.organization)
-      expect(parsed_response['organization']).to eq(new_params[:contact][:organization])
+      expect(parsed_response['organization']).
+        to eq(new_params[:contact][:organization])
       expect(response).to have_http_status(200)
     end
 
     context 'invalid data' do
       let!(:another_contact) { create(:contact, user: User.last) }
-      let(:new_params) { { contact: {email: another_contact.email} } }
+      let(:new_params) { { contact: { email: another_contact.email } } }
 
       it 'returns model errors in case of failure' do
         expect(contact.id).not_to eq(another_contact.id)

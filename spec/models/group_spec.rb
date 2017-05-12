@@ -12,7 +12,7 @@ RSpec.describe Group, type: :model do
 
   context 'API' do
     let(:expect_attributes) do
-      %w(id name user_id slug contacts created_at updated_at)
+      %w{id name user_id slug contacts created_at updated_at}
     end
 
     it 'serialize in JSON with all required attributes' do

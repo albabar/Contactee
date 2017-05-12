@@ -1,11 +1,17 @@
-lock '3.8.1'
+# frozen_string_literal: true
 
+lock '3.8.1'
 
 set :application, 'Contactee'
 set :repo_url, 'git@github.com:albabar/Contactee.git'
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads', 'node_modules')
+set :linked_files, fetch(:linked_files, []).push(
+  'config/database.yml', 'config/secrets.yml'
+)
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle',
+  'public/system', 'public/uploads', 'node_modules'
+)
 
 set :log_level, :info
 set :format, :pretty
