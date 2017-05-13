@@ -57,8 +57,10 @@ class Home extends React.Component {
   };
 
   homeComponent = () => this.state.user ? HomeIndex : Login;
+  the = ((Component) => ((props) => <Component {...this.state} {...props} />));
 
   render() {
+    const the = this.the;
     return (
       <BrowserRouter>
         <MuiThemeProvider>
@@ -69,19 +71,19 @@ class Home extends React.Component {
             >
             </AppBar>
             <div className="row center-md center-sm center-xs">
-              <Route exact path="/" component={this.homeComponent()}/>
-              <Route path="/login" component={Login}/>
-              <Route path="/logout" component={Logout}/>
-              <Route path="/register" component={Register}/>
+              <Route exact path="/" component={the(this.homeComponent())}/>
+              <Route path="/login" component={the(Login)}/>
+              <Route path="/logout" component={the(Logout)}/>
+              <Route path="/register" component={the(Register)}/>
 
               <Switch>
-                <Route exact path="/contacts" component={ContactIndex}/>
-                <Route exact path="/contacts/new" component={ContactNew} />
-                <Route exact path="/contacts/:slug" component={Contact} />
-                <Route exact path="/contacts/:slug/edit" component={ContactEdit} />
+                <Route exact path="/contacts" component={the(ContactIndex)}/>
+                <Route exact path="/contacts/new" component={the(ContactNew)} />
+                <Route exact path="/contacts/:slug" component={the(Contact)} />
+                <Route exact path="/contacts/:slug/edit" component={the(ContactEdit)} />
               </Switch>
-              <Route exact path="/groups" component={GroupIndex}/>
-              <Route exact path="/groups/:slug" component={Group} />
+              <Route exact path="/groups" component={the(GroupIndex)}/>
+              <Route exact path="/groups/:slug" component={the(Group)} />
             </div>
           </div>
         </MuiThemeProvider>
